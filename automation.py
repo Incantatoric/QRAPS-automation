@@ -6,7 +6,7 @@ import pyodbc
 import logging
 logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s -  %(levelname)s  -  %(message)s')
 
-os.chdir(r'C:\Users\quantec\Desktop\work at office\automation')
+os.chdir(r'C:\Users\quantec\Desktop\work at office\QRAPS-automation')
 
 logging.debug('Connecting to the database using pyodbc')
 
@@ -43,8 +43,9 @@ for filename in os.listdir(os.getcwd()):
             for sttv in STTV:
                 logging.debug(f'TopN={topn}, STTV={sttv}')
 
-                NewSQLName = os.path.splitext(filename)[0] + f' Top{topn}' + f' STTV{sttv}' + '.sql'
-                directory = os.path.join(os.getcwd(), os.path.splitext(filename)[0] + f' Top{topn}' + f' STTV{sttv}')
+                # NewSQLName = os.path.splitext(filename)[0] + f' Top{topn}' + f' STTV{sttv}' + '.sql'
+                directory = os.path.join(os.getcwd(), os.path.splitext(filename)[0] + f'_Top{topn}' + f'_STTV{sttv}')
+                directory = directory.replace(" ", "").replace('workatoffice', 'work at office')
                 if not os.path.exists(directory):
                     os.makedirs(directory)
 
@@ -64,7 +65,7 @@ for filename in os.listdir(os.getcwd()):
                         logging.debug(f'Warning: {len(Data1.index)} does not equal {topn}')
                         IndexLenWarningList.append((filename, len(Data1.index), topn, sttv))
 
-                    Data1.to_csv(os.path.join(directory, f'{date}_tot.csv'), encoding='euc_kr', index=False, header=False)
+                    Data1.to_csv(os.path.join(directory, f'{date[:6]}_tot.csv'), encoding='euc_kr', index=False, header=False)
 
 with open ('Index Length Warning.txt', 'w') as t:
     for item in IndexLenWarningList:
