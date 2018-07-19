@@ -62,12 +62,10 @@ for filename in os.listdir(os.getcwd()):
 
                     if len(Data1.index) != topn:
                         logging.debug(f'Warning: {len(Data1.index)} does not equal {topn}')
-                        IndexLenWarningList.append((filename,len(Data1.index), topn))
+                        IndexLenWarningList.append((filename, len(Data1.index), topn, sttv))
 
                     Data1.to_csv(os.path.join(directory, f'{date}_tot.csv'), encoding='euc_kr', index=False, header=False)
 
 with open ('Index Length Warning.txt', 'w') as t:
     for item in IndexLenWarningList:
-        t.write(str(item))
-
-IndexLenWarningList
+        t.write(str(item)+'\n')
