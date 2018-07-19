@@ -21,11 +21,7 @@ for folderName, subfolders, filenames in os.walk(os.getcwd()):
     for file in filenames:
         os.rename(os.path.join(folderName, file), os.path.join(folderName, file.rpartition('_')[0][:6]+'_tot.csv'))
 
-    print(filenames)
-    print('The current folder is ' + folderName)
-    for subfolder in subfolders:
-
-for folder in os.listdir(os.getcwd()):
-    for file in os.listdir(os.path.join(os.getcwd(), folder)):
-        print(file)
-        os.rename(file, file)
+# for folder in os.listdir(os.getcwd()):
+#     for file in os.listdir(os.path.join(os.getcwd(), folder)):
+#         print(file)
+#         os.rename(file, file)
